@@ -528,7 +528,6 @@ if __name__ == '__main__':
         trainer_finetune_checkpoint=args.finetune_checkpoint,
         epochs=int(args.epochs),
     )
-    # global_cfg = pick_configuration(dataset.name)
     
     print(global_cfg)
 
