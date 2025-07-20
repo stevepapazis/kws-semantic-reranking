@@ -1,4 +1,4 @@
-# Enhancing Keyword Spotting via NLP-Based Re-Ranking:<br> Leveraging Semantic Relevance Feedback in the<br> Handwritten Domain
+# Enhancing Keyword Spotting via NLP-Based Re-Ranking: Leveraging Semantic Relevance Feedback in the Handwritten Domain
 
 - Official repository for the code and datasets accompanying the paper:\
 *[Enhancing Keyword Spotting via NLP-Based Re-Ranking: Leveraging Semantic Relevance Feedback in the Handwritten Domain](https://www.mdpi.com/2079-9292/14/14/2900)*
