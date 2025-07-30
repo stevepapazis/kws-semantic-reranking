@@ -51,6 +51,7 @@ class WordLineDataset(Dataset):
             for line in open(self.stopwords_path):
                 self.stopwords.append(line.strip().split(','))
             self.stopwords = self.stopwords[0]
+        os.makedirs(self.basefolder + '/saved_datasets', exist_ok=True)
         save_file = self.basefolder + '/saved_datasets/{}_{}_{}.pt'.format(self.subset, self.segmentation_level, self.setname) #dataset_path + '/' + set + '_' + level + '_IAM.pt'
 
         if isfile(save_file) is False:

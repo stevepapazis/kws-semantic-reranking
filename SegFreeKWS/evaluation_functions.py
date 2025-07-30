@@ -1,6 +1,8 @@
 import numpy as np
 import logging
 
+from pathlib import Path
+
 import os
 
 import torch.cuda
@@ -207,9 +209,9 @@ def seg_free_eval(form_test_set, cnn, classes, args, Ns=None, eval_multiple_thre
     if form_test_set.setname == "IAM":
         test_pages = np.unique(["-".join(i.split("-")[:2]) for i in test_pages])
 
-    np.save("test_pages.npy", test_pages)
+    np.save(f"{Path(args.result_output_path).parent/'test_pages.npy'}", test_pages)
     
-    np.save("queries.npy", queries)
+    np.save(f"{Path(args.result_output_path).parent/'queries.npy'}", queries)
     
     results = {query: dict() for query in queries}#{page: dict() for page in test_pages}
 
