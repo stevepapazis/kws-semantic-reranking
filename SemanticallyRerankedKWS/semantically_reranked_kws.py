@@ -302,54 +302,56 @@ if __name__ == "__main__":
     
     print("Loading the WRN results...")
     wrn_results = []
-    if dataset == "IAM":
-        results_location = args.save_results_location/f"WRN_IAM_results.parquet"
-        full_results_location = args.save_results_location/f"full_WRN_IAM_results.parquet"
-        if args.skip_WRN_mAP_computation is None and (not results_location.exists() or (args.avoid_cache is not None)):
-            print("---> fresh copy")
-            df = load_WRN_bbox_suggestions_as_dataframe(args.wrn_result_location, "IAM")
-            df = df.filter(~pl.col('query').is_in(stopwords))
-            df.write_parquet(full_results_location)
-            df = rerank_by(df, "syntactic_similarity")
-            df = df.filter(pl.col("ranking")<args.rerank_candidates)
-            df.write_parquet(results_location)
-        else:
-            print("---> from cache")
-            df = pl.read_parquet(results_location)
-        wrn_results.append(df)
-    else:
-        for f in range(4):
-            results_location = args.save_results_location/f"WRN_GW{f}_results.parquet"
-            if not results_location.exists() or args.avoid_cache:
-                df = load_WRN_bbox_suggestions_as_dataframe(args.wrn_result_location, "GW", f)
+    if args.skip_WRN_mAP_computation is None:
+        if dataset == "IAM":
+            results_location = args.save_results_location/f"WRN_IAM_results.parquet"
+            full_results_location = args.save_results_location/f"full_WRN_IAM_results.parquet"
+            if not results_location.exists() or (args.avoid_cache is not None):
+                print("---> fresh copy")
+                df = load_WRN_bbox_suggestions_as_dataframe(args.wrn_result_location, "IAM")
+                df = df.filter(~pl.col('query').is_in(stopwords))
+                df.write_parquet(full_results_location)
+                df = rerank_by(df, "syntactic_similarity")
+                df = df.filter(pl.col("ranking")<args.rerank_candidates)
                 df.write_parquet(results_location)
             else:
+                print("---> from cache")
                 df = pl.read_parquet(results_location)
             wrn_results.append(df)
+        else:
+            for f in range(4):
+                results_location = args.save_results_location/f"WRN_GW{f}_results.parquet"
+                if not results_location.exists() or args.avoid_cache:
+                    df = load_WRN_bbox_suggestions_as_dataframe(args.wrn_result_location, "GW", f)
+                    df.write_parquet(results_location)
+                else:
+                    df = pl.read_parquet(results_location)
+                wrn_results.append(df)
     
     
     print("Loading the SegFreeKWS results...")
     segfreekws_results = []
-    if dataset == "IAM":
-        results_location = args.save_results_location/f"SegFreeKWS_IAM_results.parquet"
-        if args.skip_SegFreeKWS_mAP_computation is None and (not results_location.exists() or (args.avoid_cache is not None)):
-            print("---> fresh copy")
-            df = load_SegFreeKWS_bbox_suggestions_as_dataframe(args.segfreekws_result_location, dataset)
-            df = df.filter(~pl.col('query').is_in(stopwords))
-            df.write_parquet(results_location)
-        else:
-            print("---> from cache")
-            df = pl.read_parquet(results_location)
-        segfreekws_results.append(df)
-    else:
-        for f in range(4):
-            results_location = args.save_results_location/f"SegFreeKWS_GW{f}_results.parquet"
-            if not results_location.exists() or args.avoid_cache:
-                df = load_SegFreeKWS_bbox_suggestions_as_dataframe(args.segfreekws_result_location, dataset, f)
+    if args.skip_SegFreeKWS_mAP_computation is None:
+        if dataset == "IAM":
+            results_location = args.save_results_location/f"SegFreeKWS_IAM_results.parquet"
+            if not results_location.exists() or (args.avoid_cache is not None):
+                print("---> fresh copy")
+                df = load_SegFreeKWS_bbox_suggestions_as_dataframe(args.segfreekws_result_location, dataset)
+                df = df.filter(~pl.col('query').is_in(stopwords))
                 df.write_parquet(results_location)
             else:
+                print("---> from cache")
                 df = pl.read_parquet(results_location)
             segfreekws_results.append(df)
+        else:
+            for f in range(4):
+                results_location = args.save_results_location/f"SegFreeKWS_GW{f}_results.parquet"
+                if not results_location.exists() or args.avoid_cache:
+                    df = load_SegFreeKWS_bbox_suggestions_as_dataframe(args.segfreekws_result_location, dataset, f)
+                    df.write_parquet(results_location)
+                else:
+                    df = pl.read_parquet(results_location)
+                segfreekws_results.append(df)
         
     
     if args.skip_mAP_computation:

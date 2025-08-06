@@ -4,8 +4,7 @@
 import pathlib
 
 
-## TODO point this pathlib.Path where your datasets are
-seg_free_datasets = pathlib.Path.home()/"datasets"/"seg-free"
+seg_free_datasets = pathlib.Path("../../datasets").resolve()
 
 BH2M = seg_free_datasets/"BH2M"
 GW = seg_free_datasets/"GW"

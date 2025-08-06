@@ -153,6 +153,7 @@ class Trainer:
         """ Full training logic """
         self._on_epoch_finish(self.start_epoch)
         self.logger.info('Start training...')
+        epoch = 0
         for epoch in range(self.start_epoch, self.epochs + 1):
             # print(f"Training {epoch=}")
             gc.collect()
@@ -523,7 +524,7 @@ if __name__ == '__main__':
 
     global_cfg = pick_configuration(
         args.dataset,
-        trainer_output_dir=args.output,
+        trainer_output_dir=str(pathlib.Path(args.output).resolve()),
         trainer_resume_checkpoint=args.resume_checkpoint,
         trainer_finetune_checkpoint=args.finetune_checkpoint,
         epochs=int(args.epochs),

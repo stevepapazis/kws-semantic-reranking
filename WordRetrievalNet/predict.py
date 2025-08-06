@@ -401,9 +401,13 @@ if __name__ == '__main__':
     parser.add_argument("queries", nargs='+')
     parser.add_argument("topN", type=int)
     parser.add_argument("-d", "--dataset", required=True)
+    parser.add_argument("-o", "--output")
     args = parser.parse_args()
     
-    global_cfg = pick_configuration(args.dataset)
+    global_cfg = pick_configuration(
+        args.dataset, 
+        tester_output_dir=str(pathlib.Path(args.output).resolve())
+    )
     
     os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 

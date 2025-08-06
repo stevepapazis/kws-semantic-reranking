@@ -404,7 +404,7 @@ if __name__ == "__main__":
     
     new_cer = evaluate_cer_for(trainer.model, test_dataloader)
     if new_cer < best_cer:
-        trainer.model.save_pretrained(output_location/f"best_finetuned_gw{test_fold}")
+        trainer.model.save_pretrained(output_location/f"trocr_finetuned_gw_cv{test_fold}")
 
     print(f"Character error rate on test set: {100*new_cer}%")
     #0.038336078808735505
