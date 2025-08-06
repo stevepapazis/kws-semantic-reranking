@@ -100,7 +100,7 @@ def load_WRN_bbox_suggestions_as_dataframe(wrn_result_location, dataset, test_fo
     if dataset == "GW" and test_fold is not None:
         wrn_result_npy = wrn_result_location/f"predict_result_resnet50_GW{test_fold}.npy"
     elif dataset == "IAM":
-        wrn_result_npy = wrn_result_location/"predict_result_resnet50_IAM_official.npy"
+        wrn_result_npy = wrn_result_location/"predict_result_resnet50_IAM.npy"
     else:
         raise ValueError("invalid dataset or test_fold")
     data_from_result_npy = load_suggestion_dict(wrn_result_npy)
