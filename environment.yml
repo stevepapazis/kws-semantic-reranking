@@ -1,0 +1,28 @@
+#run conda env create --file environment.yml
+name: reranked-kws
+channels:
+  - conda-forge
+  - pytorch
+  - nvidia
+dependencies:
+  - python=3.10
+  - scipy
+  - scikit-image
+  - scikit-learn
+  - tqdm
+  - pillow
+  - shapely
+  - pytorch
+  - torchvision
+  - pytorch-cuda=11.8
+  - polygon3
+  - colorlog
+  - multiprocess
+  - tensorboard
+  - numba
+  - editdistance
+  - numpy==1.26
+  - sentence-transformers
+  - transformers
+  - evaluate
+  - polars

@@ -23,8 +23,8 @@ scripts/                    # Helper scripts to train and evaluate the baselines
 
 1. Install the dependencies using:
 ```
-conda create --name rerankKWS --file requirements.txt
-conda activate rerankKWS
+conda env create --file environment.yml
+conda activate reranked-kws
 ```
 
 2. Download the datasets from:
