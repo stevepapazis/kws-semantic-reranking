@@ -4,7 +4,7 @@ Official repository for the code and datasets accompanying the paper:\
 *[Enhancing Keyword Spotting via NLP-Based Re-Ranking: Leveraging Semantic Relevance Feedback in the Handwritten Domain](https://doi.org/10.3390/electronics14142900)*
 
 Overview of the proposed *semantic relevance feedback* mechanism
-![The proposed relevance feedback mechanism.](/relevance-feedback-mechanism.png "The proposed relevance feedback mechanism")
+![The proposed relevance feedback mechanism.](/relevance-feedback-mechanism.png)
 
 
 ## 📁 Repository Structure
